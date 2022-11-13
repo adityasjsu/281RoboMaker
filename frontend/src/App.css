@@ -1,0 +1,253 @@
+/* .App {
+  display: block;
+   text-align: center; 
+} */
+
+.form-heading {
+  color: #fff;
+  font-size: 23px;
+}
+.panel h2 {
+  color: #444444;
+  font-size: 18px;
+  margin: 0 0 8px 0;
+}
+.panel p {
+  color: #777777;
+  font-size: 14px;
+  margin-bottom: 30px;
+  line-height: 24px;
+}
+.login-form .form-control {
+  background: #f7f7f7 none repeat scroll 0 0;
+  border: 1px solid #d4d4d4;
+  border-radius: 4px;
+  font-size: 14px;
+  height: 50px;
+  line-height: 50px;
+}
+.main-div {
+  background: #ffffff none repeat scroll 0 0;
+  border-radius: 2px;
+  margin: 10px auto 30px;
+  max-width: 38%;
+  padding: 50px 70px 70px 71px;
+  border: 2px solid black;
+}
+
+.login-form .form-group {
+  margin-bottom: 10px;
+}
+.login-form {
+  text-align: center;
+}
+.forgot a {
+  color: #777777;
+  font-size: 14px;
+  text-decoration: underline;
+}
+.login-form .btn.btn-primary {
+  background: #55cfb5 none repeat scroll 0 0;
+  border-color: #65e79b;
+  color: #ffffff;
+  font-size: 14px;
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  padding: 0;
+}
+.forgot {
+  text-align: left;
+  margin-bottom: 30px;
+}
+.botto-text {
+  color: #ffffff;
+  font-size: 14px;
+  margin: auto;
+}
+.back {
+  text-align: left;
+  margin-top: 10px;
+}
+.back a {
+  color: #444444;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.MuiDataGrid-row.Mui-odd {
+  background-color: aliceblue;
+}
+
+.MuiDataGrid-root {
+  margin: 4%;
+  border: 1px solid #ccc;
+}
+
+.MuiTableCell-head {
+  font-weight: bold;
+  font-size: 14px;
+  background-color: slategray;
+  color: #fff !important;
+}
+
+.MuiDataGrid-columnsContainer {
+  background-color: slategray;
+  color: #fff;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.MuiPaper-elevation1 {
+  box-shadow: none !important;
+}
+
+.MuiSelect-root {
+  width: 750px !important;
+}
+
+.MuiDialog-paperWidthXs {
+  width: 80% !important;
+  max-width: none !important;
+}
+
+.MuiTable-root {
+  border: 1px solid #ccc;
+  width: 92% !important;
+  margin: 4%;
+}
+
+.MuiAvatar-root {
+  width: 80px !important;
+}
+
+.MuiButtonBase-root.Mui-disabled {
+  font-size: 14px !important;
+}
+
+.MuiTablePagination-root {
+  font-size: 14px !important;
+}
+
+.MuiToolbar-root {
+  font-size: 14px !important;
+}
+
+.MuiButton-label {
+  font-size: 10px !important;
+}
+
+html {
+  font-size: 14px;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  background-color: rgb(211, 211, 211);
+}
+.App {
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.padded-section {
+  padding: 4% 10%;
+  background-color: #dcdcdc;
+}
+
+#sidebar {
+  width: auto;
+  background: #fff;
+  color: #ccc;
+  transition: all 0.3s;
+  box-shadow: 0 0 18px -2px black;
+  border-radius: 10px;
+}
+
+#sidebar .sidebar-header {
+  padding: 20px;
+  background: #1092ec;
+  border-radius: 4px;
+}
+
+#sidebar ul.components {
+  padding: 20px 0;
+}
+
+#sidebar ul li a {
+  padding: 3rem;
+  font-size: 1.4em;
+  display: block;
+  text-decoration: none;
+}
+
+#sidebar ul li a:hover {
+  color: #7386d5;
+  background: #fff;
+  cursor: pointer;
+}
+.card {
+  border-radius: 10px;
+  box-shadow: 0 0 18px -2px black;
+}
+@media (max-width: 765px) {
+  .card {
+    display: inline-block;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    width: 18rem;
+  }
+}
+.select_ {
+  display: block;
+  padding: 5px 6px;
+  font-size: 1em;
+  margin-right: 100px;
+  margin-left: 100px;
+  height: 30%;
+  width: 40%;
+  border-radius: 10px;
+  border: 3px solid #ccc;
+}
+.dashboard h4 {
+  text-align: center;
+}
+/*.row:before, .row:after{
+  display: none !important;
+}*/
+.row {
+  display: -webkit-inline-box;
+}
