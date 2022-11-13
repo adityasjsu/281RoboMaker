@@ -1,6 +1,6 @@
-drop database if exists disinfectantrobot;
-create database disinfectantrobot;
-use disinfectantrobot;
+drop database if exists db281;
+create database db281;
+use db281;
 CREATE TABLE user_role (
   role_id  int(100) NOT NULL AUTO_INCREMENT,
   role_name varchar(20) not null, 
