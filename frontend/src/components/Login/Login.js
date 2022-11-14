@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./Login.css";
 import LoginHeader from "./Header/LoginHeader";
+import { Form, Container, Alert, Row, Col } from "react-bootstrap";
+import { useNavigate, useLocation, Link } from "react-router-dom";
+import Logo from "./logo.png"
 
 import config from '../../config.json';
 class Login extends Component {
@@ -119,8 +122,12 @@ class Login extends Component {
     
       <div className="main-container">
         <LoginHeader />
+        
+        
+
         <form onSubmit={this.checkAuthentication}>
             <div className="login-container">
+            
               {/* <img
                 height="200"
                 width="200"
@@ -129,8 +136,35 @@ class Login extends Component {
                 src={}
               /> */}
               <div className="login-content">
-                <h2>WELCOME TO ROBOT CLOUD </h2>
-                <div className="login-email-label">Email address</div>
+                <h2 style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}}>WELCOME TO </h2>
+                <img  height="200"
+                width="240"
+                 src={Logo}/>
+                 <br></br>
+                 <br></br>
+                 <h2 style={{
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+}}>Developed by Group 17 </h2>
+                 <br></br>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+              <Form.Label className="d-flex justify-content-start">
+                Email address
+              </Form.Label>
+              <Form.Control
+                type="email"
+                placeholder="Enter email"
+                name="email"
+                onChange={this.loginIdChanged}
+                autoFocus
+              />
+            </Form.Group>
+                {/* <div className="login-email-label">Email address</div>
                 <input
                   type="email"
                   name="email"
@@ -138,15 +172,32 @@ class Login extends Component {
                   placeholder="Email"
                   onChange={this.loginIdChanged}
                   required
-                />
-                <div className="login-email-label">Password</div>
+                /> */}
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+              <Form.Label className="d-flex justify-content-start">
+                Password
+                <Container className="d-flex justify-content-end">
+                  <a class="d-flex justify-content-start" href="/">
+                    Forgot Password?
+                  </a>
+                </Container>
+              </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+            
+                onChange={this.passwordChanged}
+              />
+            </Form.Group>
+                {/* <div className="login-email-label">Password</div>
                 <input
                   type="password"
                   name="password"
                   placeholder="Password"
                   onChange={this.passwordChanged}
                   required
-                />
+                /> */}
 
                 <button type="submit">Log in</button>
               </div>
