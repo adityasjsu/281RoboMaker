@@ -151,7 +151,6 @@ class Login extends Component {
     alignItems: 'center',
     justifyContent: 'center',
 }}>Developed by Group 17 </h2>
-                 <br></br>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
               <Form.Label className="d-flex justify-content-start">
                 Email address
@@ -200,6 +199,10 @@ class Login extends Component {
                 /> */}
 
                 <button type="submit">Log in</button>
+              {/* <span style={{ color: "white" }}>or</span> */}
+              <Link to="/Signup">
+                <button className="signup">Sign up</button>
+              </Link>
               </div>
             </div>
         </form>

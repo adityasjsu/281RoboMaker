@@ -141,7 +141,7 @@ class HomePage extends Component {
       console.log("redirect");
   //    cookie.remove("cookie");
       sessionStorage.clear();
-      return <Redirect to="/" />;
+      return <Redirect to="/login" />;
     } else
       return (
         <HashRouter>
