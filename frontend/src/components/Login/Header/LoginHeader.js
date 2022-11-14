@@ -24,10 +24,10 @@ class LoginHeader extends Component {
             <Link to="/">
             </Link>
             <div className="loginLinks">
-              <Link to="/login">
+              {/* <Link to="/login">
                 <button className="login">Log in</button>
               </Link>
-              <span style={{ color: "white" }}>or</span>
+              <span style={{ color: "white" }}>or</span> */}
               <Link to="/Signup">
                 <button className="signup">Sign up</button>
               </Link>
