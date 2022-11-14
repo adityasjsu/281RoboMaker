@@ -10,8 +10,8 @@ import Robot from "./components/Robot/robot.js";
 import Simulations from "./components/Simulation/simulatons";
 import Billing from "./components/Billing/Billing";
 
-import Admin from './components/Billing/admin';
-import User from './components/Billing/user';
+import Admin from "./components/Billing/admin";
+import User from "./components/Billing/user";
 
 class Main extends Component {
   render() {
@@ -27,9 +27,9 @@ class Main extends Component {
         <Route path="/navigation" component={Navigation} exact />
         <Route path="/robot" component={Robot} exact />
         <Route path="/simulations" component={Simulations} exact />
-        <Route path="/billing" component={Billing} exact /> 
-        <Route path="/billing/admin" component={Admin} exact /> 
-        <Route path="/billing/user" component={User} exact /> 
+        <Route path="/billing" component={Billing} exact />
+        <Route path="/billing/admin" component={Admin} exact />
+        <Route path="/billing/user" component={User} exact />
         {/* 
         <Route path="/appRegistration" component={AppRegistration} exact />
         <Route path="/home" component={HomePage} exact /> */}

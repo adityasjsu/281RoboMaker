@@ -31,7 +31,8 @@ class ManageRobot extends React.Component {
 
   handleSubmit(){
 
-    const data = {
+    const ud = JSON.parse(sessionStorage.getItem("userDetails"));
+    const data = { robot: {
       robotName: this.state.robotName,
       robotType: this.state.robotType,
       manuName: this.state.manuName,
@@ -39,7 +40,8 @@ class ManageRobot extends React.Component {
       version: this.state.version,
       xLoc: this.state.xLoc,
       yLoc: this.state.yLoc,
-      zLoc : this.state.zLoc
+      zLoc : this.state.zLoc },
+      userId: ud.userId
     };
     const success="Data Saved Successfully!!";    
     const headers = { headers: { "Content-Type": "application/json" } };
