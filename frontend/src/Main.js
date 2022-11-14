@@ -20,7 +20,6 @@ class Main extends Component {
         {/*Render Different Component based on Route*/}
         {/* /* <Route path="/" component={LandingPage} exact /> */}
         <Route path="/Signup" component={Signup} exact />
-        <Route path="/login" component={Login} exact />
         <Route path="/" component={Login} exact />
         <Route path="/home" component={HomePage} exact />
         <Route path="/schedule" component={RobotSchedule} exact />
