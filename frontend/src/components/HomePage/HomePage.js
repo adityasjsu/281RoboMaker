@@ -144,17 +144,27 @@ class HomePage extends Component {
       return <Redirect to="/login" />;
     } else
       return (
-        <HashRouter>
+        <div>
+          <LeftSideBar
+                  userDetails={this.state.userDetails}
+                />
+          {/* <EtsyNavigationBar /> */}
+          <HashRouter>
           <div>
             <Header userDetails={this.state.userDetails} loggedIn={this.state.loggedIn} logOut={this.logOut} />
             <div className="grid-container">
-              <div className="left-side">
+              <div >
+              {/* <LeftSideBar
+                  userDetails={this.state.userDetails}
+                /> */}
+              </div>
+            
+              {/* <div className="left-side">
                 <LeftSideBar
                   userDetails={this.state.userDetails}
                 />
-              </div>
-              <div className="center-area">
-
+              </div> */}
+            <div className="center-area">
               <Route
                   path="/"
                   render={props => (
@@ -268,6 +278,8 @@ class HomePage extends Component {
             </div>
           </div>
         </HashRouter>
+        </div>
+        
       );
   }
 }

@@ -16,7 +16,7 @@ this.fetchUsersWithNoRoles();
 }
 assignRole = (userId,roleId) => {
     let roleName="Admin";
-    if(roleId===1) roleName="Client";
+    if(roleId===2) roleName="Client";
 
     const assgnRole=window.confirm("Do you want the user to be "+roleName+"?");
     if(assgnRole){
@@ -95,7 +95,7 @@ render(){
                   <button
                     className="adminRole"
                     onClick={() => {
-                      this.assignRole(user.userId,2);
+                      this.assignRole(user.userId,1);
                     }}
                   >
                     Admin
@@ -103,7 +103,7 @@ render(){
                   <button
                     className="clientRole"
                     onClick={() => {
-                      this.assignRole(user.userId,1);
+                      this.assignRole(user.userId,2);
                     }}
                   >
                     Client
