@@ -13,6 +13,8 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import com.project.robot.model.Robot;
@@ -51,7 +53,7 @@ public class RobotRepository {
 	private final String GET_ROBOT="select ur.robot_id, ur.user_id,robot_name,"
 			+ "first_name,last_name,email,(select status_name from status where status_id=ur.status_id)\n"
 			+ "as statusName from \n"
-			+ "user_robot ur left join user u on ur.user_id=u.user_id";
+			+ "user_robot ur inner join user u on ur.user_id=u.user_id where u.user_id=:userId";
 	
 	
 	private final String GET_STATUS_COUNT = "\n"
@@ -59,12 +61,16 @@ public class RobotRepository {
 			+ "as statusName from \n"
 			+ "user_robot ur join\n"
 			+ " user u\n"
-			+ " on ur.user_id=u.user_id)sub group by sub.statusName ";
+			+ " on ur.user_id=u.user_id where u.user_id=:userId)sub group by sub.statusName ";
 	
 	
 	private final String INSERT_ROBOT ="insert into robot (robot_name,robot_type,"
 			+ "operation_system,version,x_loc,y_loc,z_loc,manufacturer_name,is_active)\n"
 			+ "values (:robotName,:robotType,:os,:version,:xLoc,:yLoc,:zLoc,:manuName,'Y')";
+
+	private final String INSERT_USER_ROBOT ="insert into user_robot (robot_id,user_id,"
+			+ "robot_name,status_id,is_active,created_date,created_by,updated_date,updated_by)\n"
+			+ "values (:robotId,:userId,:robotName,:statusId,'Y',:createdDate,:createdBy,:updatedDate,:updatedBy)";
 
 	@Autowired
 	NamedParameterJdbcTemplate namedparameterjdbctempalte;
@@ -155,7 +161,9 @@ public class RobotRepository {
 	
 
 	public List<UserRobot> getRobots (int userId) {
-		List<UserRobot> robots=  namedparameterjdbctempalte.query(GET_ROBOT,new RowMapper<UserRobot>() {
+		SqlParameterSource parameters = new MapSqlParameterSource()
+				.addValue("userId", userId);
+		List<UserRobot> robots=  namedparameterjdbctempalte.query(GET_ROBOT,parameters,new RowMapper<UserRobot>() {
 			public UserRobot mapRow(ResultSet rs,
                     int rowNum) throws SQLException {
 			   UserRobot robot = new UserRobot();
@@ -171,7 +179,9 @@ public class RobotRepository {
 	}
 	
 	public List<StatusCount> getStatusCount (int userId) {
-		List<StatusCount> statusCounts=  namedparameterjdbctempalte.query(GET_STATUS_COUNT,new RowMapper<StatusCount>() {
+		SqlParameterSource parameters = new MapSqlParameterSource()
+				.addValue("userId", userId);
+		List<StatusCount> statusCounts=  namedparameterjdbctempalte.query(GET_STATUS_COUNT, parameters,new RowMapper<StatusCount>() {
 			public StatusCount mapRow(ResultSet rs,
                     int rowNum) throws SQLException {
 				StatusCount status = new StatusCount();
@@ -184,7 +194,8 @@ public class RobotRepository {
 		return statusCounts;
 	}
 
-	public void saveRobot (Robot robot) {
+	public int saveRobot (Robot robot) {
+		GeneratedKeyHolder robotKeyHolder = new GeneratedKeyHolder();
 		SqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("robotName", robot.getRobotName())
                 .addValue("robotType", robot.getRobotType())
@@ -194,9 +205,23 @@ public class RobotRepository {
                 .addValue("yLoc", robot.getyLoc())
                 .addValue("zLoc", robot.getzLoc())
 		 		.addValue("manuName", robot.getManuName());
-			
-		namedparameterjdbctempalte.update(INSERT_ROBOT, parameters) ;
+		namedparameterjdbctempalte.update(INSERT_ROBOT, parameters, robotKeyHolder);
+		return robotKeyHolder.getKey().intValue();
 	}
-	
-	
+
+	public void saveUserRobot (Robot robot, Integer userId) {
+		//:robotId,:userId,:robotName,:statusId,:isActive,:createdDate,:createdBy,:updatedDate,:updatedBy
+		SqlParameterSource parameters = new MapSqlParameterSource()
+				.addValue("robotId", robot.getRobotId())
+				.addValue("userId", userId)
+				.addValue("robotName", robot.getRobotName())
+				.addValue("statusId", 1)
+				.addValue("isActive", 'Y')
+				.addValue("createdDate", System.currentTimeMillis())
+				.addValue("createdBy", userId.toString())
+				.addValue("updatedDate", System.currentTimeMillis())
+				.addValue("updatedBy", userId);
+
+		namedparameterjdbctempalte.update(INSERT_USER_ROBOT, parameters) ;
+	}
 }

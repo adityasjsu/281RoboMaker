@@ -1,8 +1,10 @@
 package com.project.robot.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -77,9 +79,12 @@ public class RobotController {
 	 
 	 @CrossOrigin("*")
 	 @PostMapping("/save")
-	 public void saveRobot(@RequestBody Robot robot){
-		 
-		  robotService.saveRobot(robot);
+	 public void saveRobot(@RequestBody HashMap<String, Object> robotDetails){
+		 ObjectMapper mapper = new ObjectMapper();
+		 Robot robot = mapper.convertValue(robotDetails.get("robot"), Robot.class);
+		 //Robot robot = (Robot)robotDetails.get("robot");
+		 Integer userId = (Integer) robotDetails.get("userId");
+		  robotService.saveRobot(robot, userId);
 	 }
 	
 }

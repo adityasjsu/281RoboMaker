@@ -57,7 +57,10 @@ public class RobotService {
 		return list;
 	}
 	
-	public void saveRobot (Robot robot) {
-		 repository.saveRobot(robot);
+	public void saveRobot (Robot robot, Integer userId) {
+		 int newRobotId = repository.saveRobot(robot);
+		 //List<RobotSchedule> robotId = repository.getSchedules(newRobotId);
+		 robot.setRobotId(newRobotId);
+		 repository.saveUserRobot(robot, userId);
 	}
 }
