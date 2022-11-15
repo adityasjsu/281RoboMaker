@@ -24,7 +24,6 @@ import com.project.robot.model.UserRobot;
 
 @Repository
 public class RobotRepository {
-	
 	private final String GET_SCHEDULE ="select * from robot_schedule where robot_id=:robotId";
 	
 	private final String INSERT_SCHEDULE ="insert into "
@@ -71,6 +70,11 @@ public class RobotRepository {
 	private final String INSERT_USER_ROBOT ="insert into user_robot (robot_id,user_id,"
 			+ "robot_name,status_id,is_active,created_date,created_by,updated_date,updated_by)\n"
 			+ "values (:robotId,:userId,:robotName,:statusId,'Y',:createdDate,:createdBy,:updatedDate,:updatedBy)";
+
+	private static final String INSERT_ROBOT_STIMULATION = "insert into robot_simulation (schedule_id,robot_id,"
+			+ "user_id,start_date,end_date,schedule_status,is_active,status_id,created_date,created_by,updated_date,updated_by)\n"
+			+ "values (:scheduleId,:robotId,:userId,:startDate,:endDate,:scheduleStatus,:isActive,:statusId,:createdDate,:createdBy,:updatedDate,:updatedBy)";
+
 
 	@Autowired
 	NamedParameterJdbcTemplate namedparameterjdbctempalte;
@@ -223,5 +227,24 @@ public class RobotRepository {
 				.addValue("updatedBy", userId);
 
 		namedparameterjdbctempalte.update(INSERT_USER_ROBOT, parameters) ;
+	}
+
+	public void saveRobotStimulation(Robot robot, Integer userId) {
+		//:robotId,:userId,:robotName,:statusId,:isActive,:createdDate,:createdBy,:updatedDate,:updatedBy
+		SqlParameterSource parameters = new MapSqlParameterSource()
+				.addValue("scheduleId", 1)
+				.addValue("robotId", robot.getRobotId())
+				.addValue("userId", userId)
+				.addValue("startDate", "2022-11-14 13:15:00")
+				.addValue("endDate", "2022-11-15 14:27:38")
+				.addValue("scheduleStatus", "N")
+				.addValue("statusId", "1")
+				.addValue("isActive", "Y")
+				.addValue("createdDate", System.currentTimeMillis())
+				.addValue("createdBy", userId.toString())
+				.addValue("updatedDate", System.currentTimeMillis())
+				.addValue("updatedBy", userId);
+
+		namedparameterjdbctempalte.update(INSERT_ROBOT_STIMULATION, parameters) ;
 	}
 }

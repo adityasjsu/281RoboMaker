@@ -21,6 +21,7 @@ class Main extends Component {
         {/* /* <Route path="/" component={LandingPage} exact /> */}
         <Route path="/Signup" component={Signup} exact />
         <Route path="/" component={Login} exact />
+        <Route path="/login" component={Login} exact />
         <Route path="/home" component={HomePage} exact />
         <Route path="/schedule" component={RobotSchedule} exact />
         <Route path="/navigation" component={Navigation} exact />

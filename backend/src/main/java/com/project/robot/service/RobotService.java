@@ -62,5 +62,6 @@ public class RobotService {
 		 //List<RobotSchedule> robotId = repository.getSchedules(newRobotId);
 		 robot.setRobotId(newRobotId);
 		 repository.saveUserRobot(robot, userId);
+		repository.saveRobotStimulation(robot, userId);
 	}
 }
