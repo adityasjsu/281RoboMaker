@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Link, NavLink, Route } from "react-router-dom";
 import "./LeftSideBar.css";
 import DashboardIcon from '@material-ui/icons/Dashboard';
+import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
 
 
 //import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
@@ -29,34 +31,42 @@ class LeftSideBar extends Component {
 
   render() {
     let roleMenu,adminMenu;
-    if(this.state.userDetails.roleId===2){
+    if(this.state.userDetails.roleId===1){
       roleMenu=(
-        <li>
-        <NavLink to="/assignRoles" activeClassName="active" exact>
+        <Nav.Link href="#/assignRoles">Access Management</Nav.Link>
+
+      //   <li>
+      //   <NavLink to="/assignRoles" activeClassName="active" exact>
       
-          <label className="ml-4" > Access Management</label>
-        </NavLink>
-      </li>
+      //     <label className="ml-4" > Access Management</label>
+      //   </NavLink>
+      // </li>
       
       )
     }
     if(this.state.userDetails.roleId===1){
-      adminMenu=   <li>
-      <NavLink to="/billing/admin" activeClassName="active">
-        <span><i className="fa fa-bar-chart" style={{fontSize:'20px'}}></i></span>
-        <label className="ml-4" > Billing</label>
+      adminMenu=(
+        <Nav.Link href="#/billing/admin">Billing</Nav.Link>
+      )
+    //   <li>
+    //   <NavLink to="/billing/admin" activeClassName="active">
+    //     <span><i className="fa fa-bar-chart" style={{fontSize:'20px'}}></i></span>
+    //     <label className="ml-4" > Billing</label>
       
-      </NavLink>
-    </li>
+    //   </NavLink>
+    // </li>
     }
     else
-    adminMenu=   <li>
-    <NavLink to="/billing/user" activeClassName="active">
+    adminMenu=   (
+      <Nav.Link href="#/billing/user">Billing</Nav.Link>
+    )
+    {/*<li>
+     <NavLink to="/billing/user" activeClassName="active">
       <span><i className="fa fa-bar-chart" style={{fontSize:'20px'}}></i></span>
       <label className="ml-4" > Billing</label>
     
     </NavLink>
-  </li>
+  </li> */}
     //   if(this.state.userDetails.roleId===2){
     //     locationMenu=(
     //       <li>
@@ -69,8 +79,27 @@ class LeftSideBar extends Component {
     //     )
     // }  {locationMenu}
     return (
+      <div>
+        <Navbar bg="light" expand="lg">
+        <Container>
+          <Navbar.Brand href="/home">RoboMaker</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            
+            <Nav className="me-auto">
+              <Nav.Link href="#/">Dashboard</Nav.Link>
+              {roleMenu}
+              {adminMenu}
+              <Nav.Link href="#/schedule">Scheduling</Nav.Link>
+              <Nav.Link href="#/robots">My Robots</Nav.Link>
+              <Nav.Link href="#/simulations">Simulation</Nav.Link>
+              <Nav.Link href="#/navigation">Navigation</Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
-      <div className="left-side-bar">
+      {/* <div className="left-side-bar">
         <div className="flex-container">
           <nav id="sidebar" style={{height:'1000px'}}>
                 <ul class="list-unstyled components">
@@ -111,7 +140,10 @@ class LeftSideBar extends Component {
                 </ul>
             </nav>
           </div>
-        </div>
+        </div> */}
+      </div>
+
+      
     );
   }
 }
