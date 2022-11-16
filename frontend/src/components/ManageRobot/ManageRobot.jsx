@@ -68,12 +68,12 @@ class ManageRobot extends React.Component {
         <div className="card card-registration" style={{width:'90%'}}>
         <ToastContainer autoClose={3000}  />
             <form onSubmit={this.handleSubmit} success={this.state.formSuccess} error={this.state.formError}>
-        <h3 className="m-2 text-uppercase">Register Robot</h3>
+        <div class="mydiv"><h3 className="m-2 text-uppercase">Register Robot</h3></div>
        
-          <div className="row g-0">
+          <div className="row g-0 register-body">
              
          
-            <div className="col-7">
+            <div>
               <div className="p-5 text-black">
 
                 <div className="row">
@@ -156,7 +156,7 @@ class ManageRobot extends React.Component {
               </div>
             </div>
             
-            <div class="col-5">
+            {/* <div class="col-5">
             <div className="p-5 text-black">
             <div className="row">
                   <div className="col-4 mb-4">
@@ -205,13 +205,13 @@ class ManageRobot extends React.Component {
                 </div>
 
            
-            </div>
+            </div> */}
           </div>
           <div className="row g-0" style={{marginLeft:'30%'}}>           
-                <button type="submit" className="col-2 float-right btn btn-primary btn-sm m-2" >
+                <button type="submit" className="col-2 float-right btn btn-primary btn-sm m-2 submit-button" >
                   Create
                 </button>
-                <button type="reset" className="col-2 float-right btn btn-primary btn-sm m-2">
+                <button type="reset" className="col-2 float-right btn btn-primary btn-sm m-2 submit-button" >
                   Reset
                 </button>
                 </div>
