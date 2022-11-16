@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import config from "../../config.json";
 import { Link } from 'react-router-dom';
+import DonutChart from "./component/DonutChart.js";
 
 class RobotDetails extends React.Component {
   constructor(props) {
@@ -70,7 +71,7 @@ class RobotDetails extends React.Component {
     
     return (
       <div class="container m-1">
-        <div class="row col-10 m-2">
+        {/* <div class="row col-10 m-2">
           <div className="col-3">
             <div className="card  text-center">
               <span
@@ -143,7 +144,8 @@ class RobotDetails extends React.Component {
               </span>
             </div>
           </div>
-        </div>
+        </div> */}
+        <DonutChart robotData = {this.state.countList}/>
         <div class="row col-10 m-3">
           <div class="card">
               <div class="row">
