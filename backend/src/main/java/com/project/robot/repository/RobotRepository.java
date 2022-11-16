@@ -7,20 +7,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.project.robot.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
-
-import com.project.robot.model.Robot;
-import com.project.robot.model.RobotSchedule;
-import com.project.robot.model.StatusCount;
-import com.project.robot.model.UserRobot;
 
 @Repository
 public class RobotRepository {
@@ -52,7 +48,7 @@ public class RobotRepository {
 	private final String GET_ROBOT="select ur.robot_id, ur.user_id,robot_name,"
 			+ "first_name,last_name,email,(select status_name from status where status_id=ur.status_id)\n"
 			+ "as statusName from \n"
-			+ "user_robot ur inner join user u on ur.user_id=u.user_id where u.user_id=:userId";
+			+ "user_robot ur left join user u on ur.user_id=u.user_id";
 	
 	
 	private final String GET_STATUS_COUNT = "\n"
@@ -75,6 +71,7 @@ public class RobotRepository {
 			+ "user_id,start_date,end_date,schedule_status,is_active,status_id,created_date,created_by,updated_date,updated_by)\n"
 			+ "values (:scheduleId,:robotId,:userId,:startDate,:endDate,:scheduleStatus,:isActive,:statusId,:createdDate,:createdBy,:updatedDate,:updatedBy)";
 
+	private final String GET_USER_ROLE = "select * from user where user_id=:userId";
 
 	@Autowired
 	NamedParameterJdbcTemplate namedparameterjdbctempalte;
@@ -167,6 +164,13 @@ public class RobotRepository {
 	public List<UserRobot> getRobots (int userId) {
 		SqlParameterSource parameters = new MapSqlParameterSource()
 				.addValue("userId", userId);
+		/* Class<? extends User> user = null;
+		User curr_user_role = namedparameterjdbctempalte.queryForObject(GET_USER_ROLE, parameters, user);
+		String listRobotByUserType = "";
+		if(curr_user_role.getRoleId() == 1)
+			listRobotByUserType = GET_ROBOT;
+		else
+			listRobotByUserType = GET_ROBOT + " where u.user_id=:userId"; */
 		List<UserRobot> robots=  namedparameterjdbctempalte.query(GET_ROBOT,parameters,new RowMapper<UserRobot>() {
 			public UserRobot mapRow(ResultSet rs,
                     int rowNum) throws SQLException {
