@@ -46,5 +46,16 @@ public class UserRobot {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "UserRobot{" +
+				"userId=" + userId +
+				", robotId=" + robotId +
+				", robotName='" + robotName + '\'' +
+				", email='" + email + '\'' +
+				", status='" + status + '\'' +
+				", userName='" + userName + '\'' +
+				'}';
+	}
 }

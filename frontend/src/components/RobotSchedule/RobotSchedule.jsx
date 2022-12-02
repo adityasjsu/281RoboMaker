@@ -51,6 +51,17 @@ class RobotSchedule extends React.Component {
     
       async componentDidMount() {
         const ud = JSON.parse(sessionStorage.getItem("userDetails"));
+        const robot_list = await axios
+      .get(config.backEndURL+"/robot/all?id="+ud.userId )
+      .then(
+        (res) => {
+            console.log("hellow world",res);
+          return res.data;
+        },
+        (error) => {}
+      );
+
+    this.setState({ robotList: robot_list });
         const result1 = await axios.get(config.backEndURL+"/robot/floorplans").then(
           (res) => {
             return res.data;
@@ -143,13 +154,15 @@ class RobotSchedule extends React.Component {
           this.state.masterData.map((item) =>
              {
               if (item && item.id && item.id == this.state.selectedBuilding) {
+                //console.log(item);
                 item.floors.map((o) => {
-                  if (o.id && o.name && o.id == selectedFloor) {
-                  
-                    o.rooms.map((o) => {
+                  if (o && o.id && o.id == selectedFloor) {
+                    //console.log(o);
+                    o.rooms.map((ob) => {
+                      console.log(ob);
                       roomList.push({
-                        id: o.roomId,
-                        name: o.roomName,
+                        id: ob.roomId,
+                        name: ob.roomName,
                       });
                     });
                   }
@@ -253,8 +266,8 @@ class RobotSchedule extends React.Component {
                         <option defaultValue="">Select Robot</option>
                         {this.state.robotList.map((i) => {
                           return (
-                            <option key={i.id} value={i.id}>
-                              {i.name}
+                            <option key={i.robotId} value={i.robotId}>
+                              {i.robotName}
                             </option>
                           );
                         })}

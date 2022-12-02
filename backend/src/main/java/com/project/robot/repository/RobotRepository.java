@@ -21,7 +21,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class RobotRepository {
 	private final String GET_SCHEDULE ="select * from robot_schedule where robot_id=:robotId";
-	
+	private final String GET_USER_ROBOTS ="select robot_id from user_robot where user_id=:userId limit 1 offset 1";
+
 	private final String INSERT_SCHEDULE ="insert into "
 			+ "robot_schedule(robot_id,building_id,floor_id,room_id,start_date,"
 			+ "end_date,created_by,created_date,is_active,schedule_status,status_id) "
@@ -48,8 +49,19 @@ public class RobotRepository {
 	private final String GET_ROBOT="select ur.robot_id, ur.user_id,robot_name,"
 			+ "first_name,last_name,email,(select status_name from status where status_id=ur.status_id)\n"
 			+ "as statusName from \n"
+			+ "user_robot ur left join user u on ur.user_id=u.user_id where u.user_id=:userId";
+
+	private final String GET_ALL_ROBOT="select ur.robot_id, ur.user_id,robot_name,"
+			+ "first_name,last_name,email,(select status_name from status where status_id=ur.status_id)\n"
+			+ "as statusName from \n"
 			+ "user_robot ur left join user u on ur.user_id=u.user_id";
-	
+
+	private final String GET_ALL_STATUS_COUNT = "\n"
+			+ "select sub.statusName,count(sub.statusName) as statusCount from (select robot_id,(select status_name from status where status_id=ur.status_id)\n"
+			+ "as statusName from \n"
+			+ "user_robot ur join\n"
+			+ " user u\n"
+			+ " on ur.user_id=u.user_id)sub group by sub.statusName ";
 	
 	private final String GET_STATUS_COUNT = "\n"
 			+ "select sub.statusName,count(sub.statusName) as statusCount from (select robot_id,(select status_name from status where status_id=ur.status_id)\n"
@@ -71,7 +83,7 @@ public class RobotRepository {
 			+ "user_id,start_date,end_date,schedule_status,is_active,status_id,created_date,created_by,updated_date,updated_by)\n"
 			+ "values (:scheduleId,:robotId,:userId,:startDate,:endDate,:scheduleStatus,:isActive,:statusId,:createdDate,:createdBy,:updatedDate,:updatedBy)";
 
-	private final String GET_USER_ROLE = "select * from user where user_id=:userId";
+	private final String GET_USER_ROLE = "select role_id from user where user_id=:userId";
 
 	@Autowired
 	NamedParameterJdbcTemplate namedparameterjdbctempalte;
@@ -164,40 +176,74 @@ public class RobotRepository {
 	public List<UserRobot> getRobots (int userId) {
 		SqlParameterSource parameters = new MapSqlParameterSource()
 				.addValue("userId", userId);
-		/* Class<? extends User> user = null;
-		User curr_user_role = namedparameterjdbctempalte.queryForObject(GET_USER_ROLE, parameters, user);
-		String listRobotByUserType = "";
-		if(curr_user_role.getRoleId() == 1)
-			listRobotByUserType = GET_ROBOT;
-		else
-			listRobotByUserType = GET_ROBOT + " where u.user_id=:userId"; */
-		List<UserRobot> robots=  namedparameterjdbctempalte.query(GET_ROBOT,parameters,new RowMapper<UserRobot>() {
+//		 Class<? extends User> user = null;
+		int curr_user_role = namedparameterjdbctempalte.queryForObject(GET_USER_ROLE, parameters, Integer.class);
+		//String listRobotByUserType = "";
+		List<UserRobot> robots=null;
+		//int userRobots=  namedparameterjdbctempalte.queryForObject(GET_USER_ROBOTS,parameters,Integer.class);
+		//System.out.println("<----------------------------" + userRobots);
+		if(curr_user_role == 1){
+			robots=  namedparameterjdbctempalte.query(GET_ALL_ROBOT,parameters,new RowMapper<UserRobot>() {
+				public UserRobot mapRow(ResultSet rs,
+										int rowNum) throws SQLException {
+					UserRobot robot = new UserRobot();
+					robot.setRobotId(rs.getInt("robot_id"));
+					robot.setUserId(rs.getInt("user_id"));
+					robot.setRobotName(rs.getString("robot_name"));
+					robot.setStatus(rs.getString("statusName"));
+					robot.setEmail(rs.getString("email"));
+					robot.setUserName(rs.getString("first_name")+" "+rs.getString("last_name"));
+
+					return robot;
+				}});
+		}
+		else{
+//			listRobotByUserType = GET_ROBOT + " where u.user_id=:userId";
+		robots=  namedparameterjdbctempalte.query(GET_ROBOT,parameters,new RowMapper<UserRobot>() {
 			public UserRobot mapRow(ResultSet rs,
                     int rowNum) throws SQLException {
 			   UserRobot robot = new UserRobot();
+
+				robot.setRobotId(rs.getInt("robot_id"));
+				robot.setUserId(rs.getInt("user_id"));
 			  robot.setRobotName(rs.getString("robot_name"));
 			  robot.setStatus(rs.getString("statusName"));
 			  robot.setEmail(rs.getString("email"));
-			  robot.setUserName(rs.getString("first_name")+" "+rs.getString("last_name"));
+			  robot.setUserName(rs.getString("first_name"));
 
 				return robot;
 		}});
-		
+		}
+		//System.out.println("<--------------" + robots.get(0).getRobotId() + robots.get(0).getUserId() + robots.get(0).getUserName() + "--------------->");
 		return robots;
 	}
 	
 	public List<StatusCount> getStatusCount (int userId) {
 		SqlParameterSource parameters = new MapSqlParameterSource()
 				.addValue("userId", userId);
-		List<StatusCount> statusCounts=  namedparameterjdbctempalte.query(GET_STATUS_COUNT, parameters,new RowMapper<StatusCount>() {
-			public StatusCount mapRow(ResultSet rs,
-                    int rowNum) throws SQLException {
-				StatusCount status = new StatusCount();
-				status.setName(rs.getString("statusName"));
-				status.setCount(rs.getInt("statusCount"));
-				return status;
-		}});
-		
+		int curr_user_role = namedparameterjdbctempalte.queryForObject(GET_USER_ROLE, parameters, Integer.class);
+		List<StatusCount> statusCounts = null;
+		if(curr_user_role == 1) {
+			 statusCounts=  namedparameterjdbctempalte.query(GET_ALL_STATUS_COUNT, parameters,new RowMapper<StatusCount>() {
+				public StatusCount mapRow(ResultSet rs,
+										  int rowNum) throws SQLException {
+					StatusCount status = new StatusCount();
+					status.setName(rs.getString("statusName"));
+					status.setCount(rs.getInt("statusCount"));
+					return status;
+				}});
+		}
+		else {
+			 statusCounts = namedparameterjdbctempalte.query(GET_STATUS_COUNT, parameters, new RowMapper<StatusCount>() {
+				public StatusCount mapRow(ResultSet rs,
+										  int rowNum) throws SQLException {
+					StatusCount status = new StatusCount();
+					status.setName(rs.getString("statusName"));
+					status.setCount(rs.getInt("statusCount"));
+					return status;
+				}
+			});
+		}
 
 		return statusCounts;
 	}
