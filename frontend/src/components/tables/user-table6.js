@@ -6,6 +6,8 @@ import {
   DataGrid, GridColDef, GridCellParams, GridToolbar,
 } from '@material-ui/data-grid';
 
+
+
 const payBill=(params)=> {
   
   console.log(params.row.id)
@@ -29,50 +31,63 @@ const payBill=(params)=> {
 }
 
 const columns = [
-  { field: 'id', headerName: 'Invoice No.', width: 120 },
+  { field: 'id', headerName: 'Invoice No.', width: 140 },
   {
     field: 'name',
     headerName: 'Robot ID',
-    width: 130,
-    editable: true,
-  },
-  {
-    field: 'duration',
-    headerName: 'Run(mins)',
-    width: 150,
+    width: 140,
     editable: true,
   },
   
   {
     field: 'price',
     headerName: 'Price(min)',
-    width: 150,
+    width: 180,
     editable: true,
   },
 
   {
-    field: 'amount',
-    headerName: 'Amount(USD)',
-    width: 150,
+    field: 'duration',
+    headerName: 'Run(mins)',
+    width: 180,
     editable: true,
   },
+  
+  
   {
     field: 'created_date',
     headerName: 'Bill Date',
-    width: 200,
+    width: 220,
     editable: true,
   },
   {
+    field: 'amount',
+    headerName: 'Amount(USD)',
+    width: 200,
+    editable: true,
+  },
+  /*{
     field: 'pay',
     headerName: 'Payment',
     width: 150,
       renderCell: (params: GridCellParams) => (
-      <button className="btn btn-info button" onClick={(e) => { payBill(params); }} >Pay</button>
+      <button className="btn btn-info button" onClick={(e) => { payBill(params); }} >Day</button>
 
     ),
-  },
+  },*/
+  {
+    field: 'pay',
+    headerName: 'Payment',
+    width: 250,
+      renderCell: (params: GridCellParams) => (
+    <form action="https://buy.stripe.com/test_00g3eufoc3lQfyo5kk">
+    <button className="btn btn-dark button" type="submit" onClick={(e) => { payBill(params); }} >Pay</button>
+ </form>
+      ),
+  }
 
 ];
+
 
 class UserTable6 extends React.Component{
   state={users:[]}
@@ -81,8 +96,11 @@ class UserTable6 extends React.Component{
     }
     fetchUsers=async()=>{
       const url=config.backEndURL+"/billing/user/bill/1";
+      //const ud = JSON.parse(sessionStorage.getItem("userDetails"));
+      //const url=config.backEndURL+"/billing/user/bill/" + ud.userId;
       const response=await fetch(url,{method: 'GET'});
       const data=await response.json();
+      
       console.log(data);
       console.log("####")
       this.setState({users:data})
@@ -91,8 +109,8 @@ class UserTable6 extends React.Component{
   render(){
     var total = 0;
     return (
-      <div style={{ height: 600, width: '93%' }}>
-        <div className="card-header text-white bg-info pt-2 pb-2 "><b>Invoices</b></div>
+      <div style={{ height: 600, width: '100%' }}>
+        <div className="card-header text-white bg-dark pt-14 pb-14 text-center "><b>Invoices</b></div>
         <DataGrid id={Math.random()}
           rows={this.state.users.map((user=>{
             total += user.duration
@@ -109,12 +127,14 @@ class UserTable6 extends React.Component{
           pageSize={4}
           rowsPerPageOptions={[5]}
         />
-      <div><b>Total Pending Bill: USD {total}</b></div>
-       
-      
+        
+      <div className="card-header bg-dark text-white pt-8 pb-8 text-center "><b>Total Pending Bill: USD {total}</b></div>
+     
       </div>
+
     );
   }
   
 }
+
 export default UserTable6;
