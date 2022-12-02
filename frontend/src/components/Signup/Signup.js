@@ -195,8 +195,8 @@ countryCodeChanged  =e=>{
               <div className="signup-container">
                
                 <div className="signup-content">
-                  <h2>Introduce Yourself</h2>
-                  <div > <strong> First Name</strong></div>
+                <h2>Register Form</h2>
+                 <div > <strong> First Name</strong></div>
 
                   <input
                     type="text"
@@ -231,8 +231,8 @@ countryCodeChanged  =e=>{
          <br/>
           <select name="countryCodes" value={this.state.countryCode} onChange={this.countryCodeChanged}>
           <option value="0">Select Country Code </option>
-            <option value="+1">United States(+1)</option>
-            <option value="+91">India(+91)</option>
+          <option value="+91">India(+91)</option>
+          <option value="+1">United States(+1)</option>
           </select>
           <br/>
          <strong>Phone Number</strong>
@@ -245,7 +245,7 @@ countryCodeChanged  =e=>{
           ></input>
 
           <button className="signup-btn" type="submit">
-            Sign me up
+            Register
           </button>
         </div>
                 </div>

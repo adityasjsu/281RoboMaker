@@ -18,17 +18,19 @@ class LoginHeader extends Component {
               alt="landing"
               src={landing}
             /> */}
+    
           </div>
           <div className="login-header">
-            <Link to="/"></Link>
+            <Link to="/">
+            </Link>
             <div className="loginLinks">
               {/* <Link to="/login">
                 <button className="login">Log in</button>
               </Link>
               <span style={{ color: "white" }}>or</span> */}
-              {/* <Link to="/Signup">
+              <Link to="/Signup">
                 <button className="signup">Sign up</button>
-              </Link> */}
+              </Link>
             </div>
           </div>
         </div>
