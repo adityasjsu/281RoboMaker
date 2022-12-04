@@ -5,18 +5,20 @@ import config from '../../config.json';
 import {
   DataGrid, GridColDef, GridCellParams, GridToolbar,
 } from '@material-ui/data-grid';
+import { Container } from '@material-ui/core';
 
 
 
 const payBill=(params)=> {
   
   console.log(params.row.id)
+  //const url=config.backEndURL+"/billing/user/paybill/" + params.row.id;
   const url=config.backEndURL+"/billing/user/paybill/" + params.row.id;
   var x = fetch(url)
     .then((response) => response.json())
     .then((responseJSON) => {
        if(responseJSON) {
-         alert("Bill paid for invoice number: " + params.row.id)
+         //alert("Bill paid for invoice number: " + params.row.id)
 
          window.location.reload();
        }
@@ -31,11 +33,22 @@ const payBill=(params)=> {
 }
 
 const columns = [
+  {
+    field: 'pay',
+    headerName: 'Payment',
+    width: 250,
+      renderCell: (params: GridCellParams) => (
+    <form action="https://buy.stripe.com/test_00g3eufoc3lQfyo5kk">
+    <button className="btn btn-dark button" type="submit" onClick={(e) => { payBill(params); }} >Pay Bill</button>
+ </form>
+      ),
+  },
+
   { field: 'id', headerName: 'Invoice No.', width: 140 },
   {
     field: 'name',
     headerName: 'Robot ID',
-    width: 140,
+    width: 160,
     editable: true,
   },
   
@@ -75,16 +88,7 @@ const columns = [
 
     ),
   },*/
-  {
-    field: 'pay',
-    headerName: 'Payment',
-    width: 250,
-      renderCell: (params: GridCellParams) => (
-    <form action="https://buy.stripe.com/test_00g3eufoc3lQfyo5kk">
-    <button className="btn btn-dark button" type="submit" onClick={(e) => { payBill(params); }} >Pay</button>
- </form>
-      ),
-  }
+  
 
 ];
 
@@ -95,9 +99,9 @@ class UserTable6 extends React.Component{
     this.fetchUsers()
     }
     fetchUsers=async()=>{
-      const url=config.backEndURL+"/billing/user/bill/1";
-      //const ud = JSON.parse(sessionStorage.getItem("userDetails"));
-      //const url=config.backEndURL+"/billing/user/bill/" + ud.userId;
+      //const url=config.backEndURL+"/billing/user/bill/1";
+      const ud = JSON.parse(sessionStorage.getItem("userDetails"));
+      const url=config.backEndURL+"/billing/user/bill/" + ud.userId;
       const response=await fetch(url,{method: 'GET'});
       const data=await response.json();
       
@@ -109,7 +113,7 @@ class UserTable6 extends React.Component{
   render(){
     var total = 0;
     return (
-      <div style={{ height: 600, width: '100%' }}>
+      <div style={{ height: 250, width: '100%'   }}>
         <div className="card-header text-white bg-dark pt-14 pb-14 text-center "><b>Invoices</b></div>
         <DataGrid id={Math.random()}
           rows={this.state.users.map((user=>{
@@ -124,12 +128,12 @@ class UserTable6 extends React.Component{
             }
           }))}
           columns={columns}
-          pageSize={4}
-          rowsPerPageOptions={[5]}
+          pageSize={1}
+          rowsPerPageOptions={[1]}
         />
-        
-      <div className="card-header bg-dark text-white pt-8 pb-8 text-center "><b>Total Pending Bill: USD {total}</b></div>
-     
+
+      <div className="card-header bg-dark text-white pt-14 pb-14 text-center "><b>Total Pending Bill: USD {total}</b></div>
+
       </div>
 
     );

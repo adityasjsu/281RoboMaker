@@ -1,9 +1,18 @@
-import React, { useState } from "react";
+import React, { useState,Component }  from "react";
 
 import {
   Chart, SeriesTemplate, CommonSeriesSettings, Title,
 } from 'devextreme-react/chart';
 import config from '../../config.json';
+import { Container } from "@material-ui/core";
+import Select from 'react-select';
+import { render } from 'react-dom';
+
+
+const options = [
+  { value: 'a', label: 'a' },
+  { value: 'b', label: 'b' },
+];
 
 var barColors = ["brown"];
 
@@ -13,10 +22,35 @@ const data = [
   { date: '12', number: 38 },
   { date: '13', number: 182 },
 ];
+function App(){
+  const[selects,setSelects]=useState();
+  return (
+    <div>
+      <h1>{selects}</h1>
+      <select  value="selects" onChange={e=>setSelects(e.target.value)} style={{width: '43%' }} >
+  <option value="Bar">Bar</option>
+  <option value="Pie">Pie</option>
+  <option value="Line">Line</option>
+  <option value="Doughnut">Doughnut</option>
+  </select>
+    </div>
+  )
+}
 
+  
 
 
 class BarChart extends React.Component {
+  
+  state = {
+    selectedOptions: [],
+  }
+
+  handleChange = (selectedOptions) => {
+    alert("inside");
+    this.setState({ selectedOptions });
+  }
+
   state={chartdata:[]}
   componentDidMount(){
     this.fetchUsers()
@@ -33,20 +67,46 @@ class BarChart extends React.Component {
   getData=()=>{
     console.log(data)
     this.setState({chartdata: data})
+    
   }
+ 
   render() {
     
+    const { selectedOption } = this.state;
+
     return (
-      <div style={{width: '83%' }}>
+     
+      <Container>
 
-
-  <select value="Select" style={{width: '43%' }} >
+{/* <React.Fragment> */}
+      {/* <Select
+        isMulti
+        value={selectedOption}
+        onChange={this.handleChange}
+        options={options}
+      /> */}
+       {/* <select   value={selectedOption}  onChange={this.handleChange} style={{width: '43%' }} >
   <option value="Bar">Bar</option>
   <option value="Pie">Pie</option>
   <option value="Line">Line</option>
   <option value="Doughnut">Doughnut</option>
-
   </select>
+      {this.state.selectedOptions.map(o => <p>{o.value}</p>)}
+      </React.Fragment> */}
+
+
+
+      <div style={{width: '93%' }}>
+
+  <select  value={selectedOption}  onChange={this.handleChange}  style={{width: '43%' }} >
+  <option value="Bar">Bar</option>
+  <option value="Pie">Pie</option>
+  <option value="Line">Line</option>
+  <option value="Doughnut">Doughnut</option>
+  </select>
+     {this.value.selectedOption.map(o => <p>{o.value}</p>)} 
+
+
 
         <Chart
           id="chart"
@@ -71,6 +131,11 @@ class BarChart extends React.Component {
           />
         </Chart>
       </div>
+      </Container>
+
+
+
+
     );
   }
 

@@ -9,8 +9,10 @@ import {
 } from 'devextreme-react/tree-list';
 import config from '../../config.json';
 import ContactUs from "./testemail";
+import { Container } from '@material-ui/core';
 
- 
+const masterDetail = true;
+
 
 const generateBill=(params)=> {
    const url=config.backEndURL + "/billing/admin/bill/" + params.row.id;
@@ -19,7 +21,7 @@ const generateBill=(params)=> {
     .then((responseJSON) => {
        if(responseJSON) {
          //alert("Bill Generated for " + params.row.firstName + " " + params.row.lastName + ". An email has been sent to " + params.row.email)
-      const response = window.confirm("Are you sure you want to do that?");
+      const response = window.confirm("Are you sure you want to Genrate Bill?");
 
       if (response) {
         alert("Bill Generated for " + params.row.firstName + " " + params.row.lastName + ". An email has been sent to " + params.row.email)
@@ -38,7 +40,16 @@ const generateBill=(params)=> {
 
 
 const columns = [
-  { field: 'id', headerName: 'ID', width: 120 },
+  {
+    field: 'bill',
+    headerName: 'Generate Invoice',
+    width: 190,
+      renderCell: (params: GridCellParams) => (
+      <button className="btn btn-dark button" onClick={(e) => { generateBill(params); }} >Generate Invoice</button>
+      
+    ),
+},
+  { field: 'id', headerName: 'ID', width: 140 },
   {
     field: 'firstName',
     headerName: 'First name',
@@ -54,30 +65,23 @@ const columns = [
   {
     field: 'email',
     headerName: 'Email',
-    width: 220,
-    editable: true,
-  },
-  {
-    field: 'phone',
-    headerName: 'Mobile No.',
-    width: 200,
+    width: 250,
     editable: true,
   },
   {
     field: 'countryCode',
-    headerName: 'Country Code',
-    width: 150,
+    headerName: 'Area Code',
+    width: 200,
     editable: true,
   },
   {
-      field: 'bill',
-      headerName: 'Bill',
-      width: 190,
-        renderCell: (params: GridCellParams) => (
-        <button className="btn btn-dark button" onClick={(e) => { generateBill(params); }} >Generate Bill</button>
-        
-      ),
+    field: 'phone',
+    headerName: 'Contact number',
+    width: 220,
+    editable: true,
   },
+  
+  
 
 ];
 
@@ -97,17 +101,18 @@ class AdminTable extends React.Component{
     return (
       <div style={{ height: 500, width: '100%' }}>
 
-<div className="card-header bg-dark text-white pt-2 pb-2 text-center " style={{ width: '99%' }}><b>Send a Reminder</b></div>
-
+<div className="card-header bg-dark text-white pt-2 pb-2 text-center " style={{ width: '99%' }}><b>Send a reminder Email</b></div>
+    <Container>
 
     <div class="pt-5 margin-left"  ><ContactUs/></div>
 
+    </Container>
 
 
     <div></div>
 
 
-        <div className="card-header bg-dark text-white pt-2 pb-2 text-center" style={{ width: '99%' }}><b>User List</b></div>
+        <div className="card-header bg-dark text-white pt-2 pb-2 text-center " style={{ width: '99%' }}><b>Robo User List</b></div>
          <div className="card-body">{this.state.users.length === 0 && 'No users to show'}</div>
          
         <DataGrid id={Math.random()}
@@ -124,12 +129,13 @@ class AdminTable extends React.Component{
           }))}
          
           columns={columns} 
-          pageSize={10}
-          rowsPerPageOptions={[5]}
+           pageSize={15}
+          rowsPerPageOptions={[15]}
           
         />
 
-			</div>      		
+			</div>      
+		
     );
   }
   

@@ -25,6 +25,8 @@ export const ContactUs = () => {
       <input type="text"  name="to_name" />
       <label>Email</label>
       <input type="email"  name="from_name" />
+      <label>Add Atatchement</label>
+      <input type="file" name="file"/>
       <label>Message</label>
       <textarea name="message" />
       <input type="submit" className="btn btn-dark button" value="Send" />    
