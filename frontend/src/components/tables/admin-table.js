@@ -104,7 +104,7 @@ class AdminTable extends React.Component{
 <div className="card-header bg-dark text-white pt-2 pb-2 text-center " style={{ width: '99%' }}><b>Send a reminder Email</b></div>
     <Container>
 
-    <div class="pt-5 margin-left"  ><ContactUs/></div>
+    <div class="pt-5 margin-left "  ><ContactUs/></div>
 
     </Container>
 
@@ -116,7 +116,7 @@ class AdminTable extends React.Component{
          <div className="card-body">{this.state.users.length === 0 && 'No users to show'}</div>
          
         <DataGrid id={Math.random()}
-     
+          
           rows={this.state.users.map((user=>{
             return{
               id: user.userId,

@@ -29,7 +29,7 @@ export const ContactUs = () => {
       <input type="file" name="file"/>
       <label>Message</label>
       <textarea name="message" />
-      <input type="submit" className="btn btn-dark button" value="Send" />    
+      <input type="submit" className="btn btn-dark button " value="Send" />    
       </form>
   );
 };

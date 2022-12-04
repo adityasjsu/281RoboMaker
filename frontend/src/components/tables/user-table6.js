@@ -36,7 +36,7 @@ const columns = [
   {
     field: 'pay',
     headerName: 'Payment',
-    width: 250,
+    width: 200,
       renderCell: (params: GridCellParams) => (
     <form action="https://buy.stripe.com/test_00g3eufoc3lQfyo5kk">
     <button className="btn btn-dark button" type="submit" onClick={(e) => { payBill(params); }} >Pay Bill</button>
@@ -115,7 +115,7 @@ class UserTable6 extends React.Component{
     return (
       <div style={{ height: 250, width: '100%'   }}>
         <div className="card-header text-white bg-dark pt-14 pb-14 text-center "><b>Invoices</b></div>
-        <DataGrid id={Math.random()}
+        <DataGrid class="center2" id={Math.random()}
           rows={this.state.users.map((user=>{
             total += user.duration
             return{
@@ -128,7 +128,7 @@ class UserTable6 extends React.Component{
             }
           }))}
           columns={columns}
-          pageSize={1}
+          pageSize={2}
           rowsPerPageOptions={[1]}
         />
 

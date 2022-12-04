@@ -76,7 +76,7 @@ class BarChart extends React.Component {
 
     return (
      
-      <Container>
+      <Container >
 
 {/* <React.Fragment> */}
       {/* <Select
@@ -96,15 +96,14 @@ class BarChart extends React.Component {
 
 
 
-      <div style={{width: '93%' }}>
+      <div  class="center2" style={{width: '93%' }}>
 
-  <select  value={selectedOption}  onChange={this.handleChange}  style={{width: '43%' }} >
+  <select  value="select" style={{width: '43%' }} >
   <option value="Bar">Bar</option>
   <option value="Pie">Pie</option>
   <option value="Line">Line</option>
   <option value="Doughnut">Doughnut</option>
   </select>
-     {this.value.selectedOption.map(o => <p>{o.value}</p>)} 
 
 
 
