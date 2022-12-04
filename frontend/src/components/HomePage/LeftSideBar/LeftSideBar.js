@@ -34,27 +34,12 @@ class LeftSideBar extends Component {
     if(this.state.userDetails.roleId===1){
       roleMenu=(
         <Nav.Link href="#/assignRoles">Access Management</Nav.Link>
-
-      //   <li>
-      //   <NavLink to="/assignRoles" activeClassName="active" exact>
-      
-      //     <label className="ml-4" > Access Management</label>
-      //   </NavLink>
-      // </li>
-      
       )
     }
     if(this.state.userDetails.roleId===1){
       adminMenu=(
         <Nav.Link href="#/billing/admin">Billing</Nav.Link>
       )
-    //   <li>
-    //   <NavLink to="/billing/admin" activeClassName="active">
-    //     <span><i className="fa fa-bar-chart" style={{fontSize:'20px'}}></i></span>
-    //     <label className="ml-4" > Billing</label>
-      
-    //   </NavLink>
-    // </li>
     }
     else
     adminMenu=   (
@@ -82,7 +67,7 @@ class LeftSideBar extends Component {
       <div>
         <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="/home">RoboMaker</Navbar.Brand>
+          <Navbar.Brand href="/home">CampusSecurityRoboCloud</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             
