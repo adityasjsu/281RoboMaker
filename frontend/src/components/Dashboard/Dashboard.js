@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Dashboard.css";
 import axios from "axios";
 import Logo from "./robotics.png"
+import { Container } from "react-bootstrap";
 class Dashboard extends Component{
     constructor(props){
         super(props);
@@ -19,12 +20,18 @@ class Dashboard extends Component{
             dashboardDtls=(<span>Access is needed. Please check after some time or please contact administrator</span>)
         }
         return(
-            <div className="dashboard">
-                {tp}
-                {dashboardDtls}
-                <img
-                 src={Logo}/>
-            </div>
+            <Container>
+                <h2>WELCOME to our Robot Management cloud system</h2>
+                {this.state.userDetails.roleId==3 && <span>Access is needed. Please check after some time or please contact administrator</span>}
+                    <img
+                    src="https://www.nanalyze.com/app/uploads/2017/11/GAMMA2-Robots.jpg"/>
+                {/* <div className="dashboard">
+                    {this.state.userDetails.roleId==3 && <span>Access is needed. Please check after some time or please contact administrator</span>}
+                    <img
+                    src={Logo}/>
+                </div> */}
+            </Container>
+            
         );
     }
 }

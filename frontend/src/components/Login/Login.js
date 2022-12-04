@@ -5,6 +5,7 @@ import LoginHeader from "./Header/LoginHeader";
 import { Form, Container, Alert, Row, Col } from "react-bootstrap";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import Logo from "./logo.png"
+import "font-awesome/css/font-awesome.css";
 
 import config from '../../config.json';
 class Login extends Component {
@@ -59,8 +60,8 @@ class Login extends Component {
         console.log(response);
         // sessionStorage.setItem("userId", response.data.userId);
         //sessionStorage.setItem("userName", response.data.userName);
-        if (response.status === 200) {
-          console.log(response.data);
+        if (response.status === 200 && response.data.userId !=null) {
+          console.log("the response data is : " + response.data.userId);
           this.setState({
             loginSuccessful: true,
             userId: response.data.userId,
@@ -73,6 +74,7 @@ class Login extends Component {
           });
         
         } else {
+          alert("Please enter valid user name and password")
           this.setState({
             loginSuccessful: false
           });

@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import config from '../../config.json';
+import { Container, Row, Col } from "react-bootstrap";
+import Card from "./Card";
 class AccessManagement extends Component{
 constructor(props){
     super(props);
@@ -115,13 +117,35 @@ render(){
     else
     pendingRoles="No Pending Role Assignment pending";
     return(
-        <div className="roles-grid-container">
+      <Container>
+<div className="roles-grid-container">
         <div className="pending-roles">
-          <h2>Pending Roles to User</h2>
-          <div className="flex-container">{pendingRoles}</div>
+          <h2>Please Assign the roles to the following users</h2>
+          {/* <div className="flex-container">{pendingRoles}</div> */}
         </div>
+        <Row>
+            {this.state.users.map((user) => {
+              return (
+                <Col md={3}>
+                  {" "}
+                  <Card
+                    key={user.id}
+                    id={user.id}
+                    firstName={user.firstName}
+                    lastName={user.lastName}
+                    email={user.email}
+                    mobileNo={user.mobileNo}
+                    product={user}
+                  />
+                </Col>
+              );
+            })}
+           
+          </Row>
      
       </div>
+      </Container>
+        
     );
     };
 }
