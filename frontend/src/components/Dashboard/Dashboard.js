@@ -12,7 +12,7 @@ import Customers from"./Customers1.jpg";
 import { Fade } from 'react-slideshow-image';
 import 'react-slideshow-image/dist/styles.css'
 
-
+ 
 class Dashboard extends Component{
     constructor(props){
         super(props);
