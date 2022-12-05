@@ -11,6 +11,7 @@ import img2 from "../../images/img-2.jpeg";
 import config from "../../config.json";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Container } from '@material-ui/core';
 
 class RobotSchedule extends React.Component {
     constructor(props) {
@@ -245,18 +246,19 @@ class RobotSchedule extends React.Component {
       render() {
     
         return (
-          
-          <div className="row container" >
-              <ToastContainer autoClose={3000}  />
-            <div className="card  col-6 m-2 mb-1"  style={{width:'90%'}}>
-              <h3>Create Robot Schedule</h3>
+          <Container>
+          <div className="row container  " >
+              <ToastContainer autoClose={5000}  />
+            <div className="card  col-6 m-2 mb-1 center3"  style={{width:'100%'}}>
+            <div className="card-header text-white bg-dark text-center   "><b>Create Robot Schedule</b></div>
+              {/* <h3>Create Robot Schedule</h3> */}
              
               <form onSubmit={this.handleSubmit}>
-                <div className="row">
+                <div className="row ">
                     <div class="col">
                     <div className="row">
                     <div className="form-outline">
-                      <label className="col-3 form-label m-1">Robot</label>
+                      <label className="col-3 form-label m-1  center4">Robot</label>
                       <select
                         className="col-5"
                         style={{marginLeft:'2%'}}
@@ -337,7 +339,7 @@ class RobotSchedule extends React.Component {
                   </div>
                   <div className="row">
                     <div className="form-outline">
-                      <label className="form-label col-3 m-2">Start Date</label>
+                      <label className="form-label col-3 m-2 ">Start Date</label>
                 
                       <DateTimePicker
                         selected={this.state.startDate}
@@ -366,11 +368,11 @@ class RobotSchedule extends React.Component {
                          />
                     </div>
                     </div> 
-                       <div className="row ">           
-                <button type="submit" className="col-2 float-right btn btn-primary btn-sm m-2">
+                       <div className="row  center4">           
+                <button type="submit" className="col-2 float-right btn btn-dark  m-2 ">
                   Create
                 </button>
-                <button type="reset" className="col-2 float-right btn btn-primary btn-sm m-2">
+                <button type="reset" className="col-2 float-right btn btn-dark btn-sm m-2">
                   Reset
                 </button>
                 </div>
@@ -391,30 +393,31 @@ class RobotSchedule extends React.Component {
             </div>
          
        
-            <div className="card row m-2" style={{width:'90%'}}>
-            <h3>Robot Schedule Status</h3>
-           <table className="table table-hover table-striped ">
+            <div className="card  m-2 center4" style={{width:'100%'}}>
+            <div className="card-header text-white bg-dark text-center "><b>Robot Schedule Status</b></div>
+            {/* <h3>Robot Schedule Status</h3> */}
+           <table className="table table-hover table-striped center4">
                     <thead>
+                    <th>STATUS</th>
                         <th>ROBOT</th>
                         <th>BUILDING </th>
                         <th>FLOOR </th>
                         <th>ROOM </th>
                         <th>START DATE</th>
                         <th>END DATE</th>
-                        <th>STATUS</th>
                     </thead>
                     <tbody>
                  
                         {Array.isArray(this.state.scheduleList) && this.state.scheduleList.map((data, i) => {
                             return (
                                 <tr key={i}>
+                                    <td style={{color:'green'}}>{data.statusName}</td>
                                     <td>{data.robotName}</td>
                                     <td>{data.buildingName}</td>
                                     <td>{data.floorName}</td>
                                     <td>{data.roomName}</td>
                                     <td>{data.startDateTime}</td>
                                     <td>{data.endDateTime}</td>
-                                    <td style={{color:'green'}}>{data.statusName}</td>
                                 </tr>
                             )
                         })}
@@ -423,6 +426,7 @@ class RobotSchedule extends React.Component {
           
             </div>
           </div>
+          </Container>
 
           
           

@@ -6,6 +6,8 @@ import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.css";
 
 
+
+
 //import { Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
 
 
@@ -65,9 +67,9 @@ class LeftSideBar extends Component {
     // }  {locationMenu}
     return (
       <div>
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand href="/home">CampusSecurityRoboCloud</Navbar.Brand>
+          <Navbar.Brand href="/home"> CampusSecurityRoboCloud</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             

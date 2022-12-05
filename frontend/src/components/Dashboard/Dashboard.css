@@ -1,3 +1,16 @@
 .dashboard{
     margin-top: 100px;
 }
+.video-responsive {
+    overflow: hidden;
+    position: relative;
+    height: 0;
+  }
+  
+  .video-responsive iframe {
+    left: 0;
+    top: 0;
+    height: 40%;
+    width: 50%;
+    position: absolute;
+  }

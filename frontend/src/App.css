@@ -284,8 +284,36 @@ body {
 .center2 {	
   text-align: center;	
   padding: 2.9rem .9rem .9rem .9rem;	
-  border: 1.2px solid rgb(0, 7, 0);	
+  border: .2px solid rgb(0, 7, 0);	
 }	
+.center3 {	
+  padding: 1.9rem .9rem .9rem .9rem;	
+}	
+.center4 {	
+  padding: 1.9rem .0rem .0rem .0rem;	
+}	
+.me-auto{
+  font-size: 15px;
+}
+.navbar-brand
+{
+  font-size: 40px;
+}
+.video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+
+.video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+
 /* must include css */	
 .custom-alert-box {	
   position: absolute;	

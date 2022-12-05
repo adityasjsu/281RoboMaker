@@ -3,6 +3,8 @@ import "./Dashboard.css";
 import axios from "axios";
 import Logo from "./robotics.png"
 import { Container } from "react-bootstrap";
+import PropTypes from "prop-types";
+
 class Dashboard extends Component{
     constructor(props){
         super(props);
@@ -30,9 +32,34 @@ class Dashboard extends Component{
                     <img
                     src={Logo}/>
                 </div> */}
+
+            <div className="App">
+         </div>
+
             </Container>
             
         );
     }
 }
+
+// const YoutubeEmbed = ({ embedId }) => (
+//     <div className="video-responsive center2">
+//       <iframe
+//         width="153"
+//         height="180"
+//         src={`https://www.youtube.com/embed/j0QntTKRCY4`}
+//         frameBorder="0"
+//         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+//         allowFullScreen
+//         title="Embedded youtube"
+//       />
+//       </div>
+
+    
+//   );
+  
+//   YoutubeEmbed.propTypes = {
+//     embedId: PropTypes.string.isRequired
+//   };
+  
 export default Dashboard;
