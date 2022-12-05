@@ -290,8 +290,38 @@ body {
   padding: 1.9rem .9rem .9rem .9rem;	
 }	
 .center4 {	
-  padding: 1.9rem .0rem .0rem .0rem;	
+  padding: 0rem 0rem 0rem 0rem;
 }	
+.center5 {	
+  color: #7386d5;
+  background: rgb(73, 37, 37);
+  
+}	
+.center6 {	
+  padding: 1rem 1rem 1rem 1rem;
+  border: .5px solid rgb(0, 7, 0);	
+display : flex;
+align-items: center;
+justify-content: center;
+}	
+.center7 {	
+  padding: 0rem 0rem 0rem 1rem;
+ 
+
+}	
+.padding1 {	
+  text-align: center;	
+  border: 0.1px solid rgb(0, 5, 0);	
+}	
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+  .card {
+    display: inline-block;
+  }
+
 .me-auto{
   font-size: 15px;
 }
@@ -325,6 +355,25 @@ body {
   background-color: #623de9;	
   animation: alert-box 1s ease;	
 }	
+.cf {
+  position:relative;
+  height:281px;
+  width:450px;
+  margin:0 auto;
+}
+
+.cf img {
+  position:absolute;
+  left:0;
+  -webkit-transition: opacity 1s ease-in-out;
+  -moz-transition: opacity 1s ease-in-out;
+  -o-transition: opacity 1s ease-in-out;
+  transition: opacity 1s ease-in-out;
+}
+
+.cf img.top:hover {
+  opacity:0;
+}
 @keyframes alert-box {	
 0% {	
 top: -10%;	

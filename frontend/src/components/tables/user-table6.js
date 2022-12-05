@@ -34,7 +34,7 @@ const payBill=(params)=> {
 
 const columns = [
   {
-    field: 'pay',
+    field: 'pay', 
     headerName: 'Payment',
     width: 200,
       renderCell: (params: GridCellParams) => (

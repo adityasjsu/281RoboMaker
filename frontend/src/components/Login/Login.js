@@ -6,7 +6,6 @@ import { Form, Container, Alert, Row, Col } from "react-bootstrap";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import Logo from "./logo.png"
 import "font-awesome/css/font-awesome.css";
-
 import config from '../../config.json';
 class Login extends Component {
   constructor(props) {
