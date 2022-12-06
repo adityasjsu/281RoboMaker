@@ -7,19 +7,23 @@ import {
 } from '@material-ui/data-grid';
 import { Container } from '@material-ui/core';
 
+import AccessManagement from "../AccessManagement/AccessManagement"
+import {  BrowserRouter as Router,  Routes,  Route} from "react-router-dom";
+import { Link ,Navigate } from 'react-router-dom'; 
 
 
-const payBill=(params)=> {
-  
-  console.log(params.row.id)
+
+const payBill=(params)=> { 
+ 
+  console.log(params.row.id) 
   //const url=config.backEndURL+"/billing/user/paybill/" + params.row.id;
   const url=config.backEndURL+"/billing/user/paybill/" + params.row.id;
   var x = fetch(url)
     .then((response) => response.json())
-    .then((responseJSON) => {
+    .then((responseJSON) => { 
        if(responseJSON) {
          //alert("Bill paid for invoice number: " + params.row.id)
-
+         console.log("inside bill pay");
          window.location.reload();
        }
        else {
@@ -32,11 +36,11 @@ const payBill=(params)=> {
   //alert("Bill Generated for " + params.row.firstName + " " + params.row.lastName + ". An email has been sent to " + params.row.email)
 }
 
-const columns = [
+const columns = [ 
   {
     field: 'pay', 
     headerName: 'Payment',
-    width: 200,
+    width: 180,
       renderCell: (params: GridCellParams) => (
     <form action="https://buy.stripe.com/test_00g3eufoc3lQfyo5kk">
     <button className="btn btn-dark button" type="submit" onClick={(e) => { payBill(params); }} >Pay Bill</button>
@@ -48,14 +52,14 @@ const columns = [
   {
     field: 'name',
     headerName: 'Robot ID',
-    width: 160,
+    width: 150,
     editable: true,
   },
   
   {
     field: 'price',
-    headerName: 'Price(min)',
-    width: 180,
+    headerName: 'Metric(min)',
+    width: 150,
     editable: true,
   },
 
@@ -70,30 +74,32 @@ const columns = [
   {
     field: 'created_date',
     headerName: 'Bill Date',
-    width: 220,
+    width: 190,
     editable: true,
   },
   {
     field: 'amount',
     headerName: 'Amount(USD)',
-    width: 200,
+    width: 180,
     editable: true,
   },
-  /*{
-    field: 'pay',
-    headerName: 'Payment',
-    width: 150,
+  {
+    field: 'shareqr', 
+    headerName: 'Share QR',
+    width: 200,
       renderCell: (params: GridCellParams) => (
-      <button className="btn btn-info button" onClick={(e) => { payBill(params); }} >Day</button>
+        <Link to="/billing/admin" className="btn btn-dark m-3" style={{float:'right'}}>Add New Robot</Link>
 
-    ),
-  },*/
-  
+      ),
+       
+  }
 
 ];
 
 
 class UserTable6 extends React.Component{
+
+
   state={users:[]}
   componentDidMount(){
     this.fetchUsers()
@@ -111,6 +117,7 @@ class UserTable6 extends React.Component{
    }
  
   render(){
+
     var total = 0;
     return (
       <div style={{ height: 250, width: '100%'   }}>

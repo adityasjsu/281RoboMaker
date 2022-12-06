@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import "./navigation.css";
 
+
 var NavigationControlInstance;
 const awsIot = require("aws-iot-device-sdk");
 let AWS = require("aws-sdk");
@@ -227,7 +228,7 @@ class Controller extends Component {
     return (
       <div
         className="controller"
-        style={{ backgroundColor: "rgb(169, 197, 212)" }}
+        style={{ backgroundColor: "rgb(255, 255, 255)" }}
       >
         <div className="forward">
           <button
@@ -289,7 +290,7 @@ class Odometry extends Component {
     return (
       <div
         className="location"
-        style={{ backgroundColor: "rgb(169, 197, 212)" }}
+        style={{ backgroundColor: "rgb(255, 255, 255)" }}
       >
         <div className="title">Location</div>
         <div className="name">Odometry</div>
@@ -344,8 +345,8 @@ class Navigation extends Component {
             value={this.state.heading}
           />
         </div>
-        <div className="goal_button">
-          <button className="button action_button" onClick={this.go_to_target}>
+        <div className="goal_button" >
+          <button  class="btn btn-dark" className="button action_button" onClick={this.go_to_target}>
             Go To Coordinate
           </button>
         </div>
@@ -445,19 +446,18 @@ class GameBoard extends Component {
     return (
       <div>
         {/* {redirectVar} */}
-        <div>
-          <Typography variant="h2" className={classes.title}>
+          <Typography variant="h3" className={classes.title} class=" card-header text-white bg-dark">
             Robot Controller
           </Typography>
-          <hr className={classes.hr} />
-        </div>
-        <div className="background">
+          {/* <div className="card-header text-white bg-dark pt-14 pb-14 text-center "><b>Robot Controller</b></div> */}
+          {/* <hr className={classes.hr} /> */}
+        <div className="background ">
           <div className="whiteboard">
             <div className="top">
               <Controller />
               <Odometry />
             </div>
-            <div className="bottom">
+            <div className="bottom ">
               <Navigation />
               {/* <SaveMap /> */}
             </div>

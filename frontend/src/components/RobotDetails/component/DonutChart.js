@@ -37,7 +37,8 @@ class DonutChart extends Component {
     };
     const containerProps = { width: "85%", position: "relative" };
     return (
-      <div>
+      
+      <div class="center8">
         <CanvasJSChart
           options={options}
           containerProps={containerProps}

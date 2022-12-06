@@ -4,6 +4,8 @@ import axios from "axios";
 import config from "../../config.json";
 import { Link } from 'react-router-dom';
 import DonutChart from "./component/DonutChart.js";
+import { Container } from '@material-ui/core';
+
 
 class RobotDetails extends React.Component {
   constructor(props) {
@@ -70,6 +72,7 @@ class RobotDetails extends React.Component {
   render() {
     
     return (
+      <Container>
       <div class="container m-1">
         {/* <div class="row col-10 m-2">
           <div className="col-3">
@@ -146,14 +149,17 @@ class RobotDetails extends React.Component {
           </div>
         </div> */}
         <DonutChart robotData = {this.state.countList}/>
-        <div class="row col-10 m-3">
-          <div class="card">
-              <div class="row">
-                  <div class="col-6">
-            <h3>Robot Details</h3>
+
+        <div class="row col-10 m-5 center9">
+        <div className="card-header text-white bg-dark pt-14 pb-14 text-center "><b>Robot Details</b></div>
+
+          <div class="card ">
+              <div class="row " >
+                  <div class="col-6 " >
+            {/* <h2>Robot Details</h2> */}
             </div>
             <div class="col-6">
-            <Link to="/manage-robots" className="btn btn-primary m-1" style={{float:'right'}}>Register Robot</Link>
+            <Link to="/manage-robots" className="btn btn-dark m-3" style={{float:'right'}}>Add New Robot</Link>
             </div>
             </div>
             <table className="table table-hover table-striped">
@@ -180,6 +186,7 @@ class RobotDetails extends React.Component {
           </div>
         </div>
       </div>
+      </Container>
     );
   }
 }

@@ -7,6 +7,8 @@ import moment, { isMoment } from "moment";
 import axios from "axios";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Container } from '@material-ui/core';
+
 
 import config from "../../config.json";
 
@@ -61,14 +63,15 @@ class ManageRobot extends React.Component {
 
     render() { 
         return (
-          
-  <div className="container p-2">
+         <Container>
+  <div className="container p-2 center9">
     <div className="row" >
       <div className="col">
         <div className="card card-registration" style={{width:'90%'}}>
         <ToastContainer autoClose={3000}  />
             <form onSubmit={this.handleSubmit} success={this.state.formSuccess} error={this.state.formError}>
-        <div class="mydiv"><h3 className="m-2 text-uppercase">Register Robot</h3></div>
+        {/* <div class="mydiv"><h3 className="m-2 text-uppercase">Register Robot</h3></div> */}
+        <div className="card-header text-white bg-dark pt-14 pb-14 text-center "><b>Add New Robot</b></div>
        
           <div className="row g-0 register-body">
              
@@ -207,11 +210,11 @@ class ManageRobot extends React.Component {
            
             </div> */}
           </div>
-          <div className="row g-0" style={{marginLeft:'30%'}}>           
-                <button type="submit" className="col-2 float-right btn btn-primary btn-sm m-2 submit-button" >
-                  Create
+          <div className="row g-0" style={{marginLeft:'40%'}}>           
+                <button type="submit" className="col-2 float-right btn btn-dark btn-sm m-2 submit-button" >
+                  Create 
                 </button>
-                <button type="reset" className="col-2 float-right btn btn-primary btn-sm m-2 submit-button" >
+                <button type="reset" className="col-2 float-right btn btn-dark btn-sm m-2 submit-button" >
                   Reset
                 </button>
                 </div>
@@ -220,7 +223,7 @@ class ManageRobot extends React.Component {
       </div>
     </div>
   </div>
-
+  </Container> 
             
         );
     }

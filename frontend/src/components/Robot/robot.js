@@ -173,8 +173,8 @@ this.props.history.push("/navigation");
           <div className={classes.fieldset}>
             <fieldset>
               <legend>Robots</legend>
-              <TableContainer component={Paper}>
-                <Table className={classes.table} aria-label="simple table">
+              <TableContainer component={Paper} >
+                <Table className={classes.table}  aria-label="simple table">
                   <TableHead>
                     <TableRow>
                       <TableCell>Name</TableCell>
